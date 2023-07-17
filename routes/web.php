@@ -23,11 +23,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::group(['prefix' => '/'], function () {
-//     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-//     Route::get('orders', [HomeController::class, 'orders'])->name('orders');
-// });
+Route::group(['prefix' => '/'], function () {
+    Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('orders', [HomeController::class, 'orders'])->name('orders');
+});
 
-Route::get('/{any}', function () {
-    return view('welcome');
-})->where('any', '.*');
+// Route::get('/{any}', function () {
+//     return view('welcome');
+// })->where('any', '.*');

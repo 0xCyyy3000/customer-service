@@ -79,8 +79,8 @@
         <main class="col h-100 p-3">
             @include('partials._navbar')
             <section class="main-section p-4">
-                {{-- @yield('content') --}}
-                <app-component />
+                @yield('content')
+                {{-- <app-component /> --}}
             </section>
         </main>
     </div>

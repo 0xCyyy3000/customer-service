@@ -5,8 +5,8 @@
     <hr>
     <ul class="nav nav-pills flex-column">
         <li>
-            {{-- <a href="{{ route('dashboard') }}" --}}
-            <a href="/dashboard" class="nav-link @if (Route::currentRouteName() == 'dashboard') active @else link-dark @endif">
+            <a href="{{ route('dashboard') }}"
+                class="nav-link @if (Route::currentRouteName() == 'dashboard') active @else link-dark @endif">
                 <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#speedometer2"></use>
                 </svg>
@@ -14,8 +14,8 @@
             </a>
         </li>
         <li>
-            {{-- <a href="{{ route('orders') }}" --}}
-            <a href="/orders" class="nav-link @if (Route::currentRouteName() == 'orders') active @else link-dark @endif">
+            <a href="{{ route('orders') }}"
+                class="nav-link @if (Route::currentRouteName() == 'orders') active @else link-dark @endif">
                 <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#table"></use>
                 </svg>
@@ -49,12 +49,17 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark">
+            <a href="#" class="nav-link link-dark"
+                onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
                 <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#grid"></use>
                 </svg>
                 Signout
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </li>
     </ul>
     {{-- <div class="dropdown">

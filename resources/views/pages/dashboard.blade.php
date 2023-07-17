@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- <section class="d-flex flex-wrap mb-4">
+    <section class="d-flex flex-wrap mb-4">
         <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="max-width: 310px;">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -154,7 +154,7 @@
                 </tbody>
             </table>
         </div>
-    </section> --}}
+    </section>
 
-    <dashboard-component />
+    {{-- <dashboard-component /> --}}
 @endsection
