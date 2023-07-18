@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(User::class);
-            $table->json('items');
+            $table->foreignIdFor(User::class);
+            $table->string('purpose');
             $table->string('date');
             $table->timestamps();
         });

@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        section.d-flex div.card:hover {
+            transform: scale(105%);
+            transition: all 100ms ease-out;
+        }
+    </style>
+
     <section class="d-flex flex-wrap mb-4">
         <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="width: min(210px, 210px);">
             <div class="d-flex align-items-center m-auto">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PDO;
 
 class HomeController extends Controller
 {
@@ -13,8 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // REMOVE THIS LATER ‼️
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -29,11 +29,18 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('pages.dashboard');
+        return view('pages.dashboard', ['page' => 'Dashboard']);
     }
 
     public function orders()
     {
-        return view('pages.orders');
+        return view('pages.orders', ['page' => 'Orders']);
+    }
+
+    public function appointments()
+    {
+        $slots = [9, 10, 11, 12, 1, 2, 3, 4, 5];
+
+        return view('pages.appointments', ['page' => 'Appointments']);
     }
 }

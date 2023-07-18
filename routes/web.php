@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -25,9 +26,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => '/'], function () {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('appointments', [HomeController::class, 'appointments'])->name('appointments');
     Route::get('orders', [HomeController::class, 'orders'])->name('orders');
 });
 
+Route::group(['prefix' => '/admin'], function () {
+    Route::get('/appointments', [AppointmentController::class, 'index']);
+});
 // Route::get('/{any}', function () {
 //     return view('welcome');
 // })->where('any', '.*');

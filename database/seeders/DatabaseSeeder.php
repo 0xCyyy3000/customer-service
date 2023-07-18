@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Appointment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -44,6 +47,12 @@ class DatabaseSeeder extends Seeder
             'type'      => 1,
             'email'     => 'tech@eds.com',
             'password'  => Hash::make('asdfasdf')
+        ]);
+
+        Appointment::create([
+            'user_id'   => 1,
+            'purpose'   => 'Laptop repair',
+            'date'      => Carbon::now()
         ]);
     }
 }

@@ -13,9 +13,18 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/alpine.min.js') }}" defer></script>
+
+    @livewireStyles
 </head>
 
 <body>
@@ -86,14 +95,7 @@
         </main>
     </div>
 
-    <script>
-        // $(function() {
-        //     $('[data-toggle="tooltip"]').tooltip()
-        //     $('data-toggle="tooltip"').tooltip({
-        //         boundary: 'window'
-        //     })
-        // })
-    </script>
+    @livewireScripts
 </body>
 
 </html>

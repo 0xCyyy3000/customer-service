@@ -16,8 +16,7 @@
             </a>
         </li>
         <li>
-            {{-- <a href="{{ route('orders') }}" --}}
-            <a href="#"
+            <a href="{{ route('appointments') }}"
                 class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'appointments') active @else link-dark @endif">
                 @if (Route::currentRouteName() == 'appointments')
                     <box-icon type='solid' color='white' name='calendar-check' class="mx-2"></box-icon>

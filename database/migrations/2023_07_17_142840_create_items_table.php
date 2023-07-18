@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('technician');
             $table->integer('status')->default(0);
             $table->string('image')->nullable();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });
     }
