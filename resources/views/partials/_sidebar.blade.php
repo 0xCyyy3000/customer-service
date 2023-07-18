@@ -6,55 +6,63 @@
     <ul class="nav nav-pills flex-column">
         <li>
             <a href="{{ route('dashboard') }}"
-                class="nav-link @if (Route::currentRouteName() == 'dashboard') active @else link-dark @endif">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#speedometer2"></use>
-                </svg>
+                class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'dashboard') active @else link-dark @endif">
+                @if (Route::currentRouteName() == 'dashboard')
+                    <box-icon type='solid' color='white' name='bar-chart-square' class="mx-2"></box-icon>
+                @else
+                    <box-icon type='light' color='black' name='bar-chart-square' class="mx-2"></box-icon>
+                @endif
                 Dashboard
             </a>
         </li>
         <li>
+            {{-- <a href="{{ route('orders') }}" --}}
+            <a href="#"
+                class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'appointments') active @else link-dark @endif">
+                @if (Route::currentRouteName() == 'appointments')
+                    <box-icon type='solid' color='white' name='calendar-check' class="mx-2"></box-icon>
+                @else
+                    <box-icon type='light' color='black' name='calendar-check' class="mx-2"></box-icon>
+                @endif
+                Appointments
+            </a>
+        </li>
+        <li>
             <a href="{{ route('orders') }}"
-                class="nav-link @if (Route::currentRouteName() == 'orders') active @else link-dark @endif">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#table"></use>
-                </svg>
+                class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'orders') active @else link-dark @endif">
+                @if (Route::currentRouteName() == 'orders')
+                    <box-icon type='solid' color='white' name='receipt' class="mx-2"></box-icon>
+                @else
+                    <box-icon type='light' color='black' name='receipt' class="mx-2"></box-icon>
+                @endif
                 Orders
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#grid"></use>
-                </svg>
+            <a href="#" class="d-flex align-items-center nav-link link-dark">
+                <box-icon name='list-ul' class="mx-2"></box-icon>
                 Items
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#table"></use>
-                </svg>
+            <a href="#" class="d-flex align-items-center nav-link link-dark">
+                <box-icon name='user' class="mx-2"></box-icon>
                 Accounts
             </a>
         </li>
     </ul>
     <ul class="nav nav-pills flex-column mt-auto">
         <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#table"></use>
-                </svg>
-                My profile
+            <a href="#" class="d-flex align-items-center nav-link link-dark">
+                <box-icon name='cog' class="mx-2"></box-icon>
+                Settings
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark"
+            <a href="#" class="d-flex align-items-center nav-link link-dark"
                 onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#grid"></use>
-                </svg>
+                <box-icon name='exit' class="mx-2"></box-icon>
                 Signout
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
 </head>
 
 <body>
@@ -84,6 +85,15 @@
             </section>
         </main>
     </div>
+
+    <script>
+        // $(function() {
+        //     $('[data-toggle="tooltip"]').tooltip()
+        //     $('data-toggle="tooltip"').tooltip({
+        //         boundary: 'window'
+        //     })
+        // })
+    </script>
 </body>
 
 </html>

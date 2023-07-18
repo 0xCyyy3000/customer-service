@@ -2,73 +2,69 @@
 
 @section('content')
     <section class="d-flex flex-wrap mb-4">
-        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="max-width: 310px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('assets/images/user-profile/cyril.jpeg') }}" class="img-fluid rounded-start"
-                        alt="...">
+        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="width: min(210px, 210px);">
+            <div class="d-flex align-items-center m-auto">
+                <div class="">
+                    <box-icon name='bar-chart-alt-2' size='lg' type='solid'></box-icon>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">23</h5>
-                        <p class="card-text"><small class="text-body-secondary">Repaired items</small></p>
-                    </div>
+                <div class="card-body alignt-items-baseline">
+                    <h5 class="card-title mb-0 fs-5">23</h5>
+                    <p class="card-text fs-6"><small class="text-body-secondary">Sales</small></p>
                 </div>
             </div>
         </div>
-        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="max-width: 310px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('assets/images/user-profile/cyril.jpeg') }}" class="img-fluid rounded-start"
-                        alt="...">
+        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="width: min(210px, 210px);">
+            <div class="d-flex align-items-center m-auto">
+                <div class="">
+                    <box-icon name='calendar-check' size='lg' type='light'></box-icon>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">23</h5>
-                        <p class="card-text"><small class="text-body-secondary">Repaired items</small></p>
-                    </div>
+                <div class="card-body alignt-items-baseline">
+                    <h5 class="card-title mb-0 fs-5">23</h5>
+                    <p class="card-text fs-6"><small class="text-body-secondary">Appoinments</small></p>
                 </div>
             </div>
         </div>
-        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="max-width: 310px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('assets/images/user-profile/cyril.jpeg') }}" class="img-fluid rounded-start"
-                        alt="...">
+        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="width: min(210px, 210px);">
+            <div class="d-flex align-items-center m-auto">
+                <div class="">
+                    <box-icon name='receipt' size='lg' type='light'></box-icon>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">23</h5>
-                        <p class="card-text"><small class="text-body-secondary">Repaired items</small></p>
-                    </div>
+                <div class="card-body alignt-items-baseline">
+                    <h5 class="card-title mb-0 fs-5">23</h5>
+                    <p class="card-text fs-6"><small class="text-body-secondary">Orders</small></p>
                 </div>
             </div>
         </div>
-        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="max-width: 310px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('assets/images/user-profile/cyril.jpeg') }}" class="img-fluid rounded-start"
-                        alt="...">
+        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="width: min(210px, 210px);">
+            <div class="d-flex align-items-center m-auto">
+                <div class="">
+                    <box-icon name='list-ul' size="lg"></box-icon>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">23</h5>
-                        <p class="card-text"><small class="text-body-secondary">Repaired items</small></p>
-                    </div>
+                <div class="card-body alignt-items-baseline">
+                    <h5 class="card-title mb-0 fs-5">23</h5>
+                    <p class="card-text fs-6"><small class="text-body-secondary">Items</small></p>
                 </div>
             </div>
         </div>
-        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="max-width: 310px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ asset('assets/images/user-profile/cyril.jpeg') }}" class="img-fluid rounded-start"
-                        alt="...">
+        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="width: min(210px, 210px);">
+            <div class="d-flex align-items-center m-auto">
+                <div class="">
+                    <box-icon size="lg" type='solid' name='user-account'></box-icon>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title mb-0">23</h5>
-                        <p class="card-text"><small class="text-body-secondary">Repaired items</small></p>
-                    </div>
+                <div class="card-body alignt-items-baseline">
+                    <h5 class="card-title mb-0 fs-5">23</h5>
+                    <p class="card-text fs-6"><small class="text-body-secondary">Customers</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-3 me-3 p-3 bg-white border-0 shadow" style="width: min(210px, 210px);">
+            <div class="d-flex align-items-center m-auto">
+                <div class="">
+                    <box-icon name='user' size="lg"></box-icon>
+                </div>
+                <div class="card-body alignt-items-baseline">
+                    <h5 class="card-title mb-0 fs-5">23</h5>
+                    <p class="card-text fs-6"><small class="text-body-secondary">Technicians</small></p>
                 </div>
             </div>
         </div>
