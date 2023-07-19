@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use PDO;
+use App\Models\User;
+use App\Enums\UserType;
+use App\Models\Appointment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,7 +33,19 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('pages.dashboard', ['page' => 'Dashboard']);
+        $appointments =
+            Auth::user()->type == UserType::ADMIN->value || Auth::user()->type == UserType::TECHNICIAN->value ?
+            Appointment::count() : Appointment::where('user_id', Auth::user()->id)->count();
+
+        return view('pages.dashboard', [
+            'page'          => 'Dashboard',
+            'appointments'  => $appointments,
+            'sales'         => 0,
+            'orders'        => 0,
+            'items'         => 0,
+            'customers'     => User::where('type', UserType::CLIENT->value)->count(),
+            'technicians'   => User::where('type', UserType::TECHNICIAN->value)->count()
+        ]);
     }
 
     public function orders()

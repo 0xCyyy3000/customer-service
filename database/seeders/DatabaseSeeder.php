@@ -27,32 +27,36 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'full_name' => 'Cy Pogi',
-            'address'   => 'Tacloban City',
-            'email'     => 'cy@eds.com',
-            'password'  => Hash::make('asdfasdf')
+            'full_name'         => 'Cy Pogi',
+            'address'           => 'Tacloban City',
+            'email'             => 'cy@eds.com',
+            'password'          => Hash::make('asdfasdf'),
+            'contact_number'    => '09123456789'
         ]);
 
         User::create([
-            'full_name' => 'Admin',
-            'address'   => 'Tacloban City',
-            'type'      => 2,
-            'email'     => 'admin@eds.com',
-            'password'  => Hash::make('asdfasdf')
+            'full_name'         => 'Admin',
+            'address'           => 'Tacloban City',
+            'type'              => 2,
+            'email'             => 'admin@eds.com',
+            'password'          => Hash::make('asdfasdf'),
+            'contact_number'    => '09123456789'
         ]);
 
         User::create([
-            'full_name' => 'Technician',
-            'address'   => 'Tacloban City',
-            'type'      => 1,
-            'email'     => 'tech@eds.com',
-            'password'  => Hash::make('asdfasdf')
+            'full_name'         => 'Technician',
+            'address'           => 'Tacloban City',
+            'type'              => 1,
+            'email'             => 'tech@eds.com',
+            'password'          => Hash::make('asdfasdf'),
+            'contact_number'    => '09123456789'
         ]);
 
         Appointment::create([
             'user_id'   => 1,
-            'purpose'   => 'Laptop repair',
-            'date'      => Carbon::now()
+            'title'     => 'Laptop repair',
+            'start'     => Carbon::now(),
+            'end'       => Carbon::now()
         ]);
     }
 }

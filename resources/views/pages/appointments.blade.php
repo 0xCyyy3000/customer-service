@@ -1,120 +1,237 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mb-4 px-0">
-        <button class="btn btn-primary d-flex align-content-center gap-1">
-            <box-icon class="white-on-hover" name='plus' color="white"></box-icon>
-            Create new
-        </button>
-    </div>
-    {{-- <livewire:appointment-table /> --}}
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
-    <div class="mt-5 row">
-        <div id='full_calendar_events' class="col-md-7 bg-light p-3 rounded-2"></div>
-        <div class="col-4">
-            <h3>Hello</h3>
+    <div class="row gap-4 align-items-start">
+        <div id='calendar' class="bg-white col-8 p-4 rounded-3" style="width: 700px"></div>
+        <div class="col-4 p-2 @if (Auth::user()->type != 0) mt-2 @endif">
+            @if (Auth::user()->type == 0)
+                <div class="d-flex gap-3 mb-2">
+                    <div class="d-flex gap-2 align-content-center">
+                        <box-icon name='circle' type='solid' color='tomato'></box-icon>
+                        <p class="mb-0">Taken</p>
+                    </div>
+                    <div class="d-flex gap-2 align-content-center">
+                        <box-icon name='circle' type='solid' color='#0d6efd'></box-icon>
+                        <p class="mb-0">Your appointment</p>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 1.90rem !important;">
+                    <small class="text-muted fw-bold">Available slots: <br></small>
+                    <span id="slots" class="small text-muted">Please select a date</span>
+                </div>
+            @endif
+
+            <form class="row g-3 px-3 pb-4 bg-white rounded-3 " action="{{ route('appointment.store') }}">
+                @csrf
+                @method('POST')
+                <h4 class="text-muted">Appointment form</h4>
+                <div class="col-md-12">
+                    <label for="client" class="form-label">Client</label>
+                    <input type="text" class="form-control text-muted" value="{{ Auth::user()->full_name }}"
+                        id="client" readonly>
+                    <input type="hidden" class="form-control text-muted" value="{{ Auth::user()->id }}" name="client"
+                        readonly>
+                </div>
+                <div class="col-md-12">
+                    <label for="appointment_date" class="form-label">Date</label>
+                    <input type="text" required autocomplete="off" class="form-control"
+                        placeholder="Select from Calendar" id="appointment_date" name="appointment_date">
+                </div>
+                <div class="col-md-12">
+                    <label for="appointment_time" class="form-label">Time</label>
+                    <select required name="appointment_time" id="appointment_time" class="form-select">
+                        <option value="08">08 AM</option>
+                        <option value="09">09 AM</option>
+                        <option value="10">10 AM</option>
+                        <option value="11">11 AM</option>
+                        <option value="13">01 PM</option>
+                        <option value="14">02 PM</option>
+                        <option value="15">03 PM</option>
+                        <option value="16">04 PM</option>
+                    </select>
+                </div>
+
+                <div class="col-md-12 mb-4">
+                    <label for="purpose" class="form-label">Purpose</label>
+                    <input required type="text" class="form-control" placeholder="Indicate your purpose" id="purpose"
+                        name="purpose">
+                </div>
+                <div class="col-12">
+                    <button type="submit" id="submit_appointment"
+                        class="btn btn-primary w-100 rounded d-flex gap-2 justify-content-center">
+                        <box-icon name='send' color="white"></box-icon>
+                        Submit
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     {{-- Scripts --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
-            const SITEURL = "{{ url('/admin') }}";
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            const calendar = $('#full_calendar_events').fullCalendar({
+
+            let sameDate = 0,
+                currentDate = '';
+
+            const APPOINTMENTS_URL = "{{ url('/admin') }}";
+
+            var calendar = $('#calendar').fullCalendar({
+                editable: true,
                 hiddenDays: [0, 6],
-                editable: false,
-                events: SITEURL + "/appointments",
-                displayEventTime: true,
-                eventRender: function(event, element, view) {
-                    // if (event.allDay === 'true') {
-                    //     event.allDay = true;
-                    // } else {
-                    //     event.allDay = false;
-                    // }
+                header: {
+                    left: 'prev,next, today',
+                    center: 'title',
+                    right: 'prevYear,month,listWeek,nextYear'
                 },
+                eventColor: 'grey',
+                events: APPOINTMENTS_URL + "/appointments",
                 selectable: true,
                 selectHelper: true,
-                timeFormat: 'HH:mm a',
-                // select: function(event_start, event_end, allDay) {
-                //     var event_name = prompt('Event Name:');
-                //     if (event_name) {
-                //         var event_start = $.fullCalendar.formatDate(event_start, "Y-MM-DD HH:mm:ss");
-                //         var event_end = $.fullCalendar.formatDate(event_end, "Y-MM-DD HH:mm:ss");
-                //         $.ajax({
-                //             url: SITEURL + "/calendar-crud-ajax",
-                //             data: {
-                //                 event_name: event_name,
-                //                 event_start: event_start,
-                //                 event_end: event_end,
-                //                 type: 'create'
-                //             },
-                //             type: "POST",
-                //             success: function(data) {
-                //                 displayMessage("Event created.");
-                //                 calendar.fullCalendar('renderEvent', {
-                //                     id: data.id,
-                //                     title: event_name,
-                //                     start: event_start,
-                //                     end: event_end,
-                //                     allDay: allDay
-                //                 }, true);
-                //                 calendar.fullCalendar('unselect');
-                //             }
-                //         });
-                //     }
+                timeFormat: "hh:mm A",
+                // eventAfterRender: function(event, element, view) {
+                // const DATE = $.fullCalendar.formatDate(event.start, 'Y-MM-D');
+                // if (DATE == currentDate)
+                //     sameDate++;
+
+                // currentDate = DATE;
+                // view.css('background-color', 'pink');
+                // if (sameDate == 8)
+
+                // },
+                select: function(start, end, allDay) {
+                    $('#appointment_date').val($.fullCalendar.formatDate(start, 'Y-MM-D'));
+                    $('#appointment_time').html('');
+
+                    $.ajax({
+                        url: APPOINTMENTS_URL + "/appointments",
+                        type: "GET",
+                        data: {
+                            start: $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss'),
+                            end: $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss'),
+                            type: 'getSlots'
+                        },
+                        success: function(data) {
+                            let template = ``;
+                            const AVAILABLE_HOURS = Object.values(data);
+                            $("#slots").text(AVAILABLE_HOURS);
+                            if (AVAILABLE_HOURS.length) {
+                                $('#submit_appointment').removeClass('btn-danger');
+                                $('#submit_appointment').addClass('btn-primary')
+                                $('#submit_appointment').attr('disabled', false);
+                                $('#submit_appointment').html(
+                                    "<box-icon name='send' color='white'></box-icon>" +
+                                    'Submit');
+
+                                AVAILABLE_HOURS.forEach(val => {
+                                    template +=
+                                        `<option value="${val}">${val}</option>`;
+                                });
+                                $('#appointment_time').append(template);
+                            } else {
+                                $('#submit_appointment').addClass('btn-danger');
+                                $('#submit_appointment').removeClass('btn-primary')
+                                $('#submit_appointment').attr('disabled', true);
+                                $('#submit_appointment').text('No available slot')
+                            }
+                        }
+                    })
+
+                    // if (title) {
+                    //     var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
+                    //     var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
+
+                    //     $.ajax({
+                    //         url: "{{ url('/') }}/action",
+                    //         type: "POST",
+                    //         data: {
+                    //             title: title,
+                    //             start: start,
+                    //             end: end,
+                    //             type: 'add'
+                    //         },
+                    //         success: function(data) {
+                    //             calendar.fullCalendar('refetchEvents');
+                    //             alert("Event Created Successfully");
+                    //         }
+                    //     })
+                    // }
+                },
+                // editable: true,
+                // eventResize: function(event, delta) {
+                //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+                //     var title = event.title;
+                //     var id = event.id;
+                //     $.ajax({
+                //         url: "/full-calender/action",
+                //         type: "POST",
+                //         data: {
+                //             title: title,
+                //             start: start,
+                //             end: end,
+                //             id: id,
+                //             type: 'update'
+                //         },
+                //         success: function(response) {
+                //             calendar.fullCalendar('refetchEvents');
+                //             alert("Event Updated Successfully");
+                //         }
+                //     })
                 // },
                 // eventDrop: function(event, delta) {
-                //     var event_start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
-                //     var event_end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
+                //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+                //     var title = event.title;
+                //     var id = event.id;
                 //     $.ajax({
-                //         url: SITEURL + '/calendar-crud-ajax',
-                //         data: {
-                //             title: event.event_name,
-                //             start: event_start,
-                //             end: event_end,
-                //             id: event.id,
-                //             type: 'edit'
-                //         },
+                //         url: "/full-calender/action",
                 //         type: "POST",
+                //         data: {
+                //             title: title,
+                //             start: start,
+                //             end: end,
+                //             id: id,
+                //             type: 'update'
+                //         },
                 //         success: function(response) {
-                //             displayMessage("Event updated");
+                //             calendar.fullCalendar('refetchEvents');
+                //             alert("Event Updated Successfully");
                 //         }
-                //     });
+                //     })
                 // },
+
                 eventClick: function(event) {
-                    // var eventDelete = confirm("Are you sure?");
-                    // if (eventDelete) {
+                    // if (confirm("Are you sure you want to remove it?")) {
+                    //     var id = event.id;
                     //     $.ajax({
+                    //         url: "/full-calender/action",
                     //         type: "POST",
-                    //         url: SITEURL + '/calendar-crud-ajax',
                     //         data: {
-                    //             id: event.id,
-                    //             type: 'delete'
+                    //             id: id,
+                    //             type: "delete"
                     //         },
                     //         success: function(response) {
-                    //             calendar.fullCalendar('removeEvents', event.id);
-                    //             displayMessage("Event removed");
+                    //             calendar.fullCalendar('refetchEvents');
+                    //             alert("Event Deleted Successfully");
                     //         }
-                    //     });
+                    //     })
                     // }
-                    alert("The event id => " + event.full_name)
+                    console.log(event);
                 }
             });
-        });
 
-        function displayMessage(message) {
-            toastr.success(message, 'Event');
-        }
+        });
     </script>
 @endsection

@@ -27,28 +27,30 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('orders') }}"
-                class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'orders') active @else link-dark @endif">
-                @if (Route::currentRouteName() == 'orders')
-                    <box-icon type='solid' color='white' name='receipt' class="mx-2"></box-icon>
-                @else
-                    <box-icon type='light' color='black' name='receipt' class="mx-2"></box-icon>
-                @endif
-                Orders
-            </a>
-        </li>
-        <li>
             <a href="#" class="d-flex align-items-center nav-link link-dark">
                 <box-icon name='list-ul' class="mx-2"></box-icon>
                 Items
             </a>
         </li>
-        <li>
-            <a href="#" class="d-flex align-items-center nav-link link-dark">
-                <box-icon name='user' class="mx-2"></box-icon>
-                Accounts
-            </a>
-        </li>
+        @if (Auth::user()->type > 0)
+            <li>
+                <a href="{{ route('orders') }}"
+                    class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'orders') active @else link-dark @endif">
+                    @if (Route::currentRouteName() == 'orders')
+                        <box-icon type='solid' color='white' name='receipt' class="mx-2"></box-icon>
+                    @else
+                        <box-icon type='light' color='black' name='receipt' class="mx-2"></box-icon>
+                    @endif
+                    Orders
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center nav-link link-dark">
+                    <box-icon name='user' class="mx-2"></box-icon>
+                    Accounts
+                </a>
+            </li>
+        @endif
     </ul>
     <ul class="nav nav-pills flex-column mt-auto">
         <li>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('type')->default(0);
             $table->integer('is_active')->default(1);
+            $table->string('contact_number');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

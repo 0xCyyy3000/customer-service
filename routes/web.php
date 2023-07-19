@@ -31,7 +31,10 @@ Route::group(['prefix' => '/'], function () {
 });
 
 Route::group(['prefix' => '/admin'], function () {
-    Route::get('/appointments', [AppointmentController::class, 'index']);
+    Route::group(['prefix' => '/appointments'], function () {
+        Route::get('/', [AppointmentController::class, 'index']);
+        Route::get('/store', [AppointmentController::class, 'store'])->name('appointment.store');
+    });
 });
 // Route::get('/{any}', function () {
 //     return view('welcome');

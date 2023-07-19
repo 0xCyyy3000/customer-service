@@ -86,9 +86,9 @@
         <aside class="col-sm-3 h-100">
             @include('partials._sidebar')
         </aside>
-        <main class="col h-100 p-3">
+        <main class="col p-3 h-100">
             @include('partials._navbar')
-            <section class="main-section p-4">
+            <section class="main-section p-4" style="100dvh !important;">
                 @yield('content')
                 {{-- <app-component /> --}}
             </section>
@@ -96,6 +96,13 @@
     </div>
 
     @livewireScripts
+    <script>
+        const HAS_ALERT = "{{ Session::has('success') }}";
+        const ALERT = "{{ Session::get('success') }}";
+
+        if (HAS_ALERT)
+            alert(ALERT);
+    </script>
 </body>
 
 </html>
