@@ -99,63 +99,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Argon Design System</td>
-                                    <td>$2,500 USD</td>
-                                    <td>1232323sdf-123-dfdf-13</td>
-                                    <td>Not charging</td>
-                                    <td class="d-flex gap-2">
-                                        <box-icon name='circle' type='solid' color="orange"></box-icon>
-                                        <p class="fw-semibold">in progress</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>teasingggg</td>
-                                    <td>$2,500 USD</td>
-                                    <td>1232323sdf-123-dfdf-13</td>
-                                    <td>Not charging</td>
-                                    <td class="d-flex gap-2">
-                                        <box-icon name='circle' type='solid' color="yellowgreen"></box-icon>
-                                        <p class="fw-semibold">repaired</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Teat</td>
-                                    <td>$2,500 USD</td>
-                                    <td>1232323sdf-123-dfdf-13</td>
-                                    <td>Not charging</td>
-                                    <td class="d-flex gap-2">
-                                        <box-icon name='circle' type='solid' color="blue"></box-icon>
-                                        <p class="fw-semibold">returned</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>cccdtd>
-                                    <td>$2,500 USD</td>
-                                    <td>1232323sdf-123-dfdf-13</td>
-                                    <td>Not charging</td>
-                                    <td class="d-flex gap-2">
-                                        <box-icon name='circle' type='solid' color="yellowgreen"></box-icon>
-                                        <p class="fw-semibold">in progress</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Argon Design System</td>
-                                    <td>$2,500 USD</td>
-                                    <td>1232323sdf-123-dfdf-13</td>
-                                    <td>Not charging</td>
-                                    <td class="d-flex gap-2">
-                                        <box-icon name='circle' type='solid' color="crimson"></box-icon>
-                                        <p class="fw-semibold">failed</p>
-                                    </td>
-                                </tr>
+                                @foreach ($item_list as $item)
+                                    <tr>
+                                        <td>{{ $item->model }}</td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->serial_no }}</td>
+                                        <td>{{ $item->issue }}</td>
+                                        <td class="d-flex gap-2">
+                                            <box-icon name='circle' type='solid' color="{{ $item->color }}"></box-icon>
+                                            <p class="fw-semibold">{{ $item->status }}</p>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <center class="mt-4">
-                <a href="{{ route('appointments') }}" class=" text-decoration-none">See all</a>
+                <a href="{{ route('items') }}" class=" text-decoration-none">see more items</a>
             </center>
         </div>
     </div>

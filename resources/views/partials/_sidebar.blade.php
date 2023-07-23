@@ -27,8 +27,13 @@
             </a>
         </li>
         <li>
-            <a href="#" class="d-flex align-items-center nav-link link-dark">
-                <box-icon name='list-ul' class="mx-2"></box-icon>
+            <a href="{{ route('items') }}"
+                class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'items' or Route::currentRouteName() == 'items.select') active @else link-dark @endif">
+                @if (Route::currentRouteName() == 'items' or Route::currentRouteName() == 'items.select')
+                    <box-icon name='list-ul' class="mx-2" color="white"></box-icon>
+                @else
+                    <box-icon name='list-ul' class="mx-2" color="black"></box-icon>
+                @endif
                 Items
             </a>
         </li>

@@ -17,7 +17,7 @@ class AppointmentController extends Controller
         $available_hours = ['08 AM', '09 AM', '10 AM', '11 AM', '01 PM', '02 PM', '03 PM', '04 PM'];
         // $available_hours = ['09 AM', '01 PM', '03 PM'];
 
-        $slots = Appointment::whereDate('start', '>=', $start)->whereDate('end', '<=', $end)->get();
+        $slots = Appointment::whereDate('start', '>=', $start)->whereDate('end', '<', $end)->get();
         foreach ($slots as $slot) {
             $taken_hour = Carbon::parse($slot->start)->format('h A');
             $index      = array_search($taken_hour, $available_hours);
@@ -34,7 +34,6 @@ class AppointmentController extends Controller
         if ($client) {
             return Appointment::whereDate('start', '>=', $request->start)
                 ->whereDate('end', '<=', $request->end)
-                // ->where('user_id', Auth::user()->id)
                 ->get(['id', 'user_id', 'title', 'start'])
                 ->map(function ($row) {
                     if ($row->user_id != Auth::user()->id) {
@@ -96,6 +95,6 @@ class AppointmentController extends Controller
             'end'       => $date_time
         ]);
 
-        return redirect()->back()->with('success', 'Appointment submitted!');
+        return redirect()->back()->with('alert', 'Appointment submitted!');
     }
 }

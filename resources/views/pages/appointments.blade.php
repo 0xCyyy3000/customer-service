@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
 
     <div class="row gap-4 align-items-start">
-        <div id='calendar' class="bg-white col-8 p-4 rounded-3" style="width: 700px"></div>
+        <div id='calendar' class="bg-white col-8 p-4 rounded-3 shadow" style="width: 700px"></div>
         <div class="col-4 p-2 @if (Auth::user()->type != 0) mt-2 @endif">
             @if (Auth::user()->type == 0)
                 <div class="d-flex gap-3 mb-2">
@@ -88,7 +88,7 @@
             const APPOINTMENTS_URL = "{{ url('/admin') }}";
 
             var calendar = $('#calendar').fullCalendar({
-                editable: true,
+                editable: false,
                 hiddenDays: [0, 6],
                 header: {
                     left: 'prev,next, today',
@@ -98,7 +98,7 @@
                 eventColor: 'grey',
                 events: APPOINTMENTS_URL + "/appointments",
                 selectable: true,
-                selectHelper: true,
+                selectHelper: false,
                 timeFormat: "hh:mm A",
                 // eventAfterRender: function(event, element, view) {
                 // const DATE = $.fullCalendar.formatDate(event.start, 'Y-MM-D');

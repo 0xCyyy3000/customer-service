@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::group(['prefix' => '/'], function () {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('appointments', [HomeController::class, 'appointments'])->name('appointments');
     Route::get('orders', [HomeController::class, 'orders'])->name('orders');
+
+    Route::group(['prefix' => 'items'], function () {
+        Route::get('', [HomeController::class, 'items'])->name('items');
+        Route::get('{item}', [ItemController::class, 'item'])->name('items.select');
+        Route::put('update/{item}', [ItemController::class, 'update'])->name('items.update');
+    });
 });
 
 Route::group(['prefix' => '/admin'], function () {
