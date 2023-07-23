@@ -44,27 +44,28 @@ class HomeController extends Controller
         return Auth::user()->type == UserType::ADMIN->value || Auth::user()->type == UserType::TECHNICIAN->value;
     }
 
+    public function getStatusColor($status)
+    {
+        switch (strtolower($status)) {
+            case 'failed':
+                return 'crimson';
+            case 'in progress':
+                return 'orange';
+            case 'repaired':
+                return 'yellowgreen';
+            default:
+                return 'blue';
+        }
+    }
+
     private function getItemList()
     {
-        return $this->isAdmin() ?
-            Item::limit(5)->get() :
-            Item::where('user_id', Auth::user()->id)->latest()->limit(5)->get()->map(function ($row) {
-                switch (strtolower($row->status)) {
-                    case 'failed':
-                        $row->color = 'crimson';
-                        break;
-                    case 'in progress':
-                        $row->color = 'orange';
-                        break;
-                    case 'repaired':
-                        $row->color = 'yellowgreen';
-                        break;
-                    default:
-                        $row->color = 'blue';
-                        break;
-                }
-                return $row;
-            });
+        $items = $this->isAdmin() ? Item::limit(5)->get() : Item::where('user_id', Auth::user()->id)->latest()->limit(5)->get();
+
+        return $items->map(function ($row) {
+            $row->color = $this->getStatusColor($row->status);
+            return $row;
+        });
     }
 
     public function dashboard()
