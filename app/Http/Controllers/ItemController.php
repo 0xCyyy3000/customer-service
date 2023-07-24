@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     private function isAdmin()
     {
         return Auth::user()->type == UserType::ADMIN->value || Auth::user()->type == UserType::TECHNICIAN->value;

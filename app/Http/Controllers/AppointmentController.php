@@ -12,6 +12,11 @@ use PDO;
 
 class AppointmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     private function getSlots($start, $end)
     {
         $available_hours = ['08 AM', '09 AM', '10 AM', '11 AM', '01 PM', '02 PM', '03 PM', '04 PM'];
