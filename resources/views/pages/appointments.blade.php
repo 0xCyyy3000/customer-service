@@ -24,7 +24,7 @@
                 </div>
             @endif
 
-            <form class="row g-3 px-3 pb-4 bg-white rounded-3 " action="{{ route('appointment.store') }}">
+            <form class="row g-3 px-3 pb-4 bg-white rounded-3 shadow" action="{{ route('appointment.store') }}">
                 @csrf
                 @method('POST')
                 <h4 class="text-muted">Appointment form</h4>

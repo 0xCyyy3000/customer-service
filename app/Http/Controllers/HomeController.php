@@ -17,16 +17,23 @@ class HomeController extends Controller
      */
 
     const TECHNICIAN_ROLE = 1;
+    const CLIENT = 0;
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['technicians']]);
+        $this->middleware('auth', ['except' => ['technicians', 'clients']]);
     }
 
     public function technicians()
     {
         $technicians = User::where('type', $this::TECHNICIAN_ROLE)->get(['id', 'full_name']);
         return response()->json($technicians);
+    }
+
+    public function clients()
+    {
+        $clients = User::where('type', $this::CLIENT)->get(['id', 'full_name']);
+        return response()->json($clients);
     }
 
     /**
@@ -99,5 +106,10 @@ class HomeController extends Controller
     public function items()
     {
         return view('pages.items', ['page' => 'Items']);
+    }
+
+    public function invoices()
+    {
+        return view('pages.invoices', ['page' => 'Invoices']);
     }
 }

@@ -1,18 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        section.d-flex div.card:hover {
-            transform: scale(105%);
-            transition: all 100ms ease-out;
-        }
-    </style>
-
-    <div class="container bg-white p-3 rounded-3">
-        <button class="btn p-0 d-flex align-items-center gap-2 mb-4" id="modify-btn">
-            <box-icon type='solid' name='edit' color="#0c6dfd"></box-icon>
-            <p class="m-0">Modify item</p>
-        </button>
+    <div class="container bg-white p-3 rounded-3 shadow">
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Owned by
+                <strong>{{ $item->user->full_name == Auth::user()->full_name ? "You ({$item->user->full_name})" : $item->user->full_name }}</strong>
+            </p>
+            <button class="btn p-0 d-flex align-items-center gap-2 mb-4" id="modify-btn">
+                <box-icon type='solid' name='edit' color="#0c6dfd"></box-icon>
+                <p class="m-0">Modify item</p>
+            </button>
+        </div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -70,7 +68,7 @@
             <div class="form-check col-md-7">
                 <div class="p-3">
                     <input class="form-check-input @if (Auth::user()->type != 0) item @endif" name="has_warranty"
-                        disabled type="checkbox" name="has_warranty" @checked($item->has_warranty) id="has_warranty">
+                        disabled type="checkbox" name="has_warranty" @checked(strtolower($item->has_warranty) == 'yes') id="has_warranty">
                     <label class="form-check-label text-primary" for="has_warranty">
                         This item has warranty
                     </label>
@@ -93,7 +91,7 @@
             $('.item').attr('disabled', true);
         });
 
-        let technicians;
+        let technicians, clients;
 
         $.ajax({
             url: "{{ route('api-v1-technicians') }}",

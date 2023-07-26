@@ -66,4 +66,28 @@ class ItemController extends Controller
 
         return back()->with('alert', 'A problem was occured, please try again.');
     }
+
+    public function store(Request $request)
+    {
+        $fields = $request->validate([
+            'model'         => 'required',
+            'description'   => 'required',
+            'issue'         => 'required',
+            'serial_no'     => '',
+            'user_id'       => 'required'
+        ]);
+
+        $user_id = substr($request->user_id, 1, strpos($request->user_id, '-') - 1);
+        if (!User::find($user_id))
+            return back()->with('alert', "A problem was occured, please try again. Did you assigned a client?");
+
+        $fields['user_id'] = $user_id;
+        
+        $created = Item::create($fields);
+
+        if ($created)
+            return back()->with('alert', 'Item added!');
+
+        return back()->with('alert', 'Unable to add item.');
+    }
 }

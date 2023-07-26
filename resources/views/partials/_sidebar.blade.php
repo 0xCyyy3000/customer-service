@@ -1,6 +1,7 @@
-<div class="h-100 d-flex flex-column flex-shrink-0 p-3 bg-light fixed-top" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <span class="fs-4">Customer Service</span>
+<div class="h-100 d-flex flex-column flex-shrink-0 p-3 bg-light fixed-top shadow" style="width: 280px;">
+    <a href="{{ route('dashboard') }}" class="mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <img src="{{ asset('assets/images/eds.png') }}" class="w-100 d-block" alt="">
+        {{-- <small class="fs-6 text-center d-block text-muted fw-semibold">© 2023 Alonzo Technologies</small> --}}
     </a>
     <hr>
     <ul class="nav nav-pills flex-column">
@@ -27,6 +28,17 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('invoices') }}"
+                class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'invoices') active @else link-dark @endif">
+                @if (Route::currentRouteName() == 'invoices' or Route::currentRouteName() == 'invoices.select')
+                    <box-icon name='notepad' class="mx-2" color="white"></box-icon>
+                @else
+                    <box-icon name='notepad' class="mx-2" color="black"></box-icon>
+                @endif
+                Invoices
+            </a>
+        </li>
+        <li>
             <a href="{{ route('items') }}"
                 class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'items' or Route::currentRouteName() == 'items.select') active @else link-dark @endif">
                 @if (Route::currentRouteName() == 'items' or Route::currentRouteName() == 'items.select')
@@ -37,7 +49,7 @@
                 Items
             </a>
         </li>
-        @if (Auth::user()->type > 0)
+        @if (Auth::user()->type != \App\Enums\UserType::CLIENT->value)
             <li>
                 <a href="{{ route('orders') }}"
                     class="d-flex align-items-center nav-link @if (Route::currentRouteName() == 'orders') active @else link-dark @endif">

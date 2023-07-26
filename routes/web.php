@@ -30,10 +30,17 @@ Route::group(['prefix' => '/'], function () {
     Route::get('appointments', [HomeController::class, 'appointments'])->name('appointments');
     Route::get('orders', [HomeController::class, 'orders'])->name('orders');
 
+    Route::group(['prefix' => 'invoices'], function () {
+        Route::get('/', [HomeController::class, 'invoices'])->name('invoices');
+        Route::get('/{invoice_id}', [HomeController::class, 'invoice'])->name('invoices.select');
+    });
+
     Route::group(['prefix' => 'items'], function () {
         Route::get('', [HomeController::class, 'items'])->name('items');
+        Route::post('', [ItemController::class, 'store'])->name('items.store');
         Route::get('{item}', [ItemController::class, 'item'])->name('items.select');
         Route::put('update/{item}', [ItemController::class, 'update'])->name('items.update');
+        Route::delete('update/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
     });
 });
 

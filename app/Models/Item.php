@@ -20,7 +20,8 @@ class Item extends Model
         'technician',
         'status',
         'image',
-        'accessories'
+        'accessories',
+        'user_id'
     ];
 
     protected function status(): Attribute

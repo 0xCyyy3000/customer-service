@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/v1/technicians', [HomeController::class, 'technicians'])->name('api-v1-technicians');
+Route::get('/v1/clients', [HomeController::class, 'clients'])->name('api-v1-clients');
