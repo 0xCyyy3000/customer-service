@@ -89,11 +89,11 @@ class ItemController extends Controller
             'user_id'       => 'required'
         ]);
 
-        $user_id = substr($request->user_id, 1, strpos($request->user_id, '-') - 1);
-        if (!User::find($user_id))
-            return back()->with('alert', "A problem was occured, please try again. Did you assigned a client?");
+        if (Auth::user()->type != 0)
+            $fields['user_id'] = substr($request->user_id, 1, strpos($request->user_id, '-') - 1);
 
-        $fields['user_id'] = $user_id;
+        if (!User::find($fields['user_id']))
+            return back()->with('alert', "A problem was occured, please try again. Did you assigned a client?");
 
         $created = Item::create($fields);
 

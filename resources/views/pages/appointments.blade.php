@@ -93,7 +93,7 @@
                 header: {
                     left: 'prev,next, today',
                     center: 'title',
-                    right: 'prevYear,month,listWeek,nextYear'
+                    right: 'prevYear,month,listMonth,nextYear'
                 },
                 eventColor: 'grey',
                 events: APPOINTMENTS_URL + "/appointments",
