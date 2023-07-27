@@ -12,7 +12,7 @@ class ItemController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['changePhoto']]);
     }
 
     private function isAdmin()
@@ -36,6 +36,18 @@ class ItemController extends Controller
             'page' => $item->model,
             'item' => $item
         ]);
+    }
+
+    public function changePhoto(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('images/items', 'public');
+            Item::where('id', $request->item)->update(['image' => $image]);
+
+            return back()->with('alert', 'Photo has been changed!');
+        }
+
+        return back()->with('alert', 'An error has occured, please try again!');
     }
 
     public function update(Request $request)
@@ -82,7 +94,7 @@ class ItemController extends Controller
             return back()->with('alert', "A problem was occured, please try again. Did you assigned a client?");
 
         $fields['user_id'] = $user_id;
-        
+
         $created = Item::create($fields);
 
         if ($created)

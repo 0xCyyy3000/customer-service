@@ -40,6 +40,7 @@ Route::group(['prefix' => '/'], function () {
         Route::post('', [ItemController::class, 'store'])->name('items.store');
         Route::get('{item}', [ItemController::class, 'item'])->name('items.select');
         Route::put('update/{item}', [ItemController::class, 'update'])->name('items.update');
+        Route::patch('update/change-photo/{item}', [ItemController::class, 'changePhoto'])->name('items.change-photo');
         Route::delete('update/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
     });
 });
