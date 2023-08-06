@@ -44,6 +44,8 @@ Enter the command below in the terminal to generate the tables and run the seede
 By entering the command <code>php artisan serve</code> the project is now running.
 Just open a browser and copy then paste the link from the terminal.
 
+Don't forget to run <code>npm run dev</code> command.
+
 ## Contact me
 
 If you're having any issues or questions, feel free to [contact me.](mailto:akosicy3000@gmail.com)
