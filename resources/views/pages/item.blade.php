@@ -37,23 +37,22 @@
                 @method('PUT')
                 <div class="mb-3 col-md-5">
                     <label for="model" class="form-label">Model</label>
-                    <input disabled required type="text" value="{{ $item->model }}"
-                        class="form-control @if (Auth::user()->type == 0) item @endif" name="model">
+                    <input disabled required type="text" value="{{ $item->model }}" class="form-control item"
+                        name="model">
                 </div>
                 <div class="mb-3 col-md-5">
                     <label for="serial_no" class="form-label">Serial No</label>
-                    <input disabled type="text" value="{{ $item->serial_no }}"
-                        class="form-control @if (Auth::user()->type == 0) item @endif" name="serial_no">
+                    <input disabled type="text" value="{{ $item->serial_no }}" class="form-control item"
+                        name="serial_no">
                 </div>
                 <div class="mb-3 col-md-12">
                     <label for="description" class="form-label">Description</label>
-                    <textarea disabled required class="form-control @if (Auth::user()->type == 0) item @endif" name="description"
-                        rows="3">{{ $item->description }}</textarea>
+                    <textarea disabled required class="form-control item" name="description" rows="3">{{ $item->description }}</textarea>
                 </div>
                 <div class="mb-3 col-md-7">
                     <label for="issue" class="form-label">Issue</label>
-                    <input disabled required type="text" value="{{ $item->issue }}"
-                        class="form-control @if (Auth::user()->type == 0) item @endif" name="issue">
+                    <input disabled required type="text" value="{{ $item->issue }}" class="form-control item"
+                        name="issue">
                 </div>
                 <div class="col-md-4">
                     <label for="status" class="form-label">Status</label>
@@ -159,13 +158,12 @@
 
         function changePhoto() {
             $('#change-photo-btn').click();
-            // item = "{{ $item->image }}";
             item = "{{ asset('assets/images/items/macbook air m2.webp') }}";
         }
 
         function readURL(input) {
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
+                const reader = new FileReader();
                 reader.onload = function(e) {
                     $('#item-image').attr('src', e.target.result);
                     $('#item-image').hide();
@@ -180,7 +178,6 @@
         });
 
         function cancelChange() {
-            console.log(item);
             $('.change-photo-btns').addClass('d-none');
             $('#item-image').attr('src', item);
             $('#item-image').hide();

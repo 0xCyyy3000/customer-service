@@ -173,4 +173,12 @@
     </main>
 </body>
 
+<script>
+    const HAS_ALERT = "{{ Session::has('alert') }}";
+    const ALERT = "{{ Session::get('alert') }}";
+
+    if (HAS_ALERT)
+    alert(ALERT);
+</script>
+
 </html>

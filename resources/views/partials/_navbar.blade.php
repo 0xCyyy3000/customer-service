@@ -11,7 +11,8 @@
         @auth
             <span>Hello,</span><strong class="mx-2">{{ Auth::user()->full_name }}</strong>
         @endauth
-        <img src="{{ asset('assets/images/user-profile/cyril.jpeg') }}" alt="" width="42" height="42"
-            class="rounded-circle">
+        {{-- <img src="{{ asset('assets/images/eds.png') }}" alt="" width="42" height="42"
+            class="rounded-circle object-fit-lg-contain"> --}}
+        <box-icon type='solid' name='user-circle' color='#0c6dfd' size='md'></box-icon>
     </a>
 </div>
