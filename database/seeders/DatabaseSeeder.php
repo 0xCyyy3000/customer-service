@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'full_name'         => 'Cy Pogi',
+            'full_name'         => 'John Doe',
             'address'           => 'Tacloban City',
-            'email'             => 'cy@eds.com',
+            'email'             => 'johnDoe@eds.com',
             'password'          => Hash::make('asdfasdf'),
             'contact_number'    => '09123456789'
         ]);
