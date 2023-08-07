@@ -44,6 +44,22 @@ Enter the command below in the terminal to generate the tables and run the seede
 By entering the command <code>php artisan serve</code> the project is now running.
 Just open a browser and copy then paste the link from the terminal.
 
+## Default accounts
+
+-   User role
+
+    > email = johnDoe@eds.com <br>
+    > password = asdfasdf
+
+-   Technician role
+
+    > email = tech@eds.com <br>
+    > password = asdfasdf
+
+-   Admin role
+    > email = admin@eds.com <br>
+    > password = adsfasdf
+
 Don't forget to run <code>npm run dev</code> command.
 
 ## Contact me
